@@ -1,10 +1,9 @@
+#include "node.hpp"
 #include <iostream>
+#include <queue>
+#include <vector>
 
 using namespace std;
-
-
-
-
 
 
 
@@ -15,7 +14,7 @@ int main(){
     cout << "Введите имя файла: ";
     cin >> frname;
 
-    long freq[256];
+    long freq[256] = {0};
 
     FILE* fr = fopen(frname.c_str(), "rb");
     if(!fr){
@@ -29,6 +28,24 @@ int main(){
         freq[(unsigned char)fgetc(fr)] ++;
     }
     fclose(fr);
-    
+
+
+    priority_queue<Node, vector<Node>, LowestPriority> queue;
+    for(int i = 0; i < 256; ++i){
+        if(freq[i]!=0){
+            Node node(i, freq[i]);
+            queue.push(node);
+        }
+    }
+
+
+
+
+
+    // for(int i = 0; i < 256; ++i){
+    //     if(freq[i]!=0){
+    //         cout << "[" << i << "] = " << freq[i] << endl; 
+    //     }
+    // }
 
 }
