@@ -49,6 +49,13 @@
         "streambuf": "cpp",
         "text_encoding": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
-    }
+        "variant": "cpp",
+        "chrono": "cpp",
+        "ranges": "cpp",
+        "expected": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "bitset": "cpp"
+    },
+    "C_Cpp.errorSquiggles": "disabled"
 }
