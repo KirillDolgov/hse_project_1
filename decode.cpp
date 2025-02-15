@@ -45,8 +45,8 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
     ifs.read(reinterpret_cast<char*>(&byte_count), sizeof byte_count);
     ifs.read(reinterpret_cast<char*>(&modulo), sizeof modulo);
 
-    int i = 0;
-    for(; i < byte_count; ++i){
+    int l = 0;
+    for(; l < byte_count; ++l){
         uchar byte;
         ifs.read(reinterpret_cast<char*>(&byte), sizeof byte);
         bitset<CHAR_BIT> b(byte);
@@ -117,9 +117,9 @@ int main(){
     queue_t queue2;
     
     for(int i = 0; i < 256; ++i){
-        if(freq[i]!=0){
+        if(freq2[i]!=0){
             Node::pointer node = make_shared<Node>(i, freq2[i]);
-            queue.push(node);
+            queue2.push(node);
         }
     }
 
@@ -127,9 +127,9 @@ int main(){
     while(queue2.size() > 1)
     {
     Node::pointer x = queue2.top();
-    queue.pop();
+    queue2.pop();
     Node::pointer y = queue2.top();
-    queue.pop();
+    queue2.pop();
     Node::pointer z = make_shared<Node>(0, x->get_freq()+y->get_freq());
     z->left = x;
     z->right = y;
