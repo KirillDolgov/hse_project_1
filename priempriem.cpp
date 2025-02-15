@@ -11,13 +11,13 @@ void make_code(Node::pointer& node, string str, vector<string>& codes){
         make_code(node->left, str + "0", codes);
     }
     if(node->right != nullptr){
-        make_code(node->left, str + "1", codes);
+        make_code(node->right, str + "1", codes);
     }
 
     if(node->left == nullptr && node->right == nullptr){
         node->code(str);
         codes[node->get_byte()] = str;
-        cout << "leaf: " << node << " code: " << node->code() << "\n";
+        cout << "leaf: " << (int)node->get_byte() << " code: " << node->code() << "\n";
     }
 }
 
@@ -68,7 +68,7 @@ int main(){
     queue.push(z);
     } 
 
-    vector<string> codes(0x100, "");
+    vector<string> codes(256, "");
     Node::pointer root = queue.top();
     make_code(root, "", codes);
 

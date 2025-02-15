@@ -26,7 +26,7 @@ public:
         return freq;
     }
 
-    int set_freq(int f){
+    void set_freq(int f){
         freq = f;
     }
 
@@ -52,7 +52,7 @@ private:
 class LowestPriority{
 public:
     bool operator()(const Node::pointer& left, const Node::pointer& right) const{
-        return left->get_freq() < right->get_freq();
+        return left->get_freq() > right->get_freq();
     }
 };
 
