@@ -53,8 +53,8 @@ void write_file(const string& filename, vector<int>& freq, const queue_t& queue,
         return;
     }
 
-    unsigned char count = count_if(freq.begin(), freq.end(), [](const int& value) { return (value != 0); });
-    cout << "Count: " << (int)count << endl;
+    double count = count_if(freq.begin(), freq.end(), [](const double& value) { return (value != 0); });
+    cout << "Count: " << (double)count << endl;
 
     ofs.write(reinterpret_cast<char*>(&count), sizeof count);
 

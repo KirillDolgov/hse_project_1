@@ -19,7 +19,7 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
         return;
     }
 
-    uchar count = 0;
+    double count = 0;
     ifs.read(reinterpret_cast<char*>(&count), sizeof count);
     // cout << "Read count: " << (int)count << endl;
     int i = 0;
