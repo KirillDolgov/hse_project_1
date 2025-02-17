@@ -1,5 +1,5 @@
 #include "node.hpp"
-#include "func.hpp"
+#include "func.cpp"
 
 int main(){
     string frname;
