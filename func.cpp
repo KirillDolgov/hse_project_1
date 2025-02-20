@@ -50,7 +50,7 @@ void write_file(const string& filename, vector<int>& freq, const queue_t& queue,
     }
 
     double count = count_if(freq.begin(), freq.end(), [](const double& value) { return (value != 0); });
-    cout << "Уникальных символов: " << (double)count << endl;
+    //cout << "Уникальных символов: " << (double)count << endl;
 
     ofs.write(reinterpret_cast<char*>(&count), sizeof count);
 
@@ -85,7 +85,7 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
     string new_filename = filename + ".hfc";
     ifstream ifs(new_filename, ifstream::binary);
     if(!ifs){
-        throw "file does not exist";
+        throw "Ошибка: этот файл не расширения .hfs.";
         return;
     }
 
@@ -96,7 +96,6 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
         uchar ch;
         ifs.read(reinterpret_cast<char*>(&ch), sizeof ch);
 
-
         int f = 0;
         ifs.read(reinterpret_cast<char*>(&f), sizeof f);
         freq[ch] = f;
@@ -105,8 +104,13 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
 
     int byte_count = 0;
     int modulo = 0;
+    uchar dick = 0;
     ifs.read(reinterpret_cast<char*>(&byte_count), sizeof byte_count);
-    ifs.read(reinterpret_cast<char*>(&modulo), CHAR_BIT);
+    ifs.read(reinterpret_cast<char*>(&modulo), sizeof dick);
+    if (modulo == 0 && byte_count == 0) {
+        throw "Ошибка: файл слишком маленький.";
+        return;
+    }
 
     int l = 0;
     //cerr << byte_count << " - это int\n";
@@ -157,5 +161,4 @@ void write_decoding_file(const string& filename, const string& text){
     }
 
     ofs << text;
-
 }

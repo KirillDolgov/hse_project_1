@@ -17,12 +17,12 @@ int main(){
     vector<int> freq2(256, 0);
     string message2 = "";
     
-    //проверка что файл нужного расширения
+    //проверка что файл нужного расширения и не пустой
     try {
         read_decoding_file(frname, freq2, message2);
     }
-    catch(...) {
-        cerr << "Ошибка: этот файл не расширения .hfs.\n";
+    catch(const char* error_message) {
+        cerr << error_message << endl;
         return 1;
     }
 
