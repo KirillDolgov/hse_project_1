@@ -6,6 +6,8 @@ int main(){
     cout << "Введите имя файла: ";
     cin >> frname;
 
+    clock_t startTime = clock();
+
     vector<int> freq(256, 0);
 
     FILE* fr = fopen(frname.c_str(), "rb");
@@ -14,11 +16,17 @@ int main(){
         return 1;
     }
 
-    int ch;
+    int ch, k = 0;
     while ((ch = fgetc(fr)) != EOF) {
-        freq[(unsigned char)ch]++;
+        freq[(uchar)ch]++;
+        k = 1;
     }
     fclose(fr);
+
+    if (k == 0) {
+        cerr << "Ошибка: файл пустой.\n";
+        return 1;
+    }
 
     queue_t queue;
 
@@ -50,6 +58,8 @@ int main(){
     string message = message2code(frname, codes);
 
     write_file(frname, freq, queue, message);
+
+    cout << "Заняло времени: " << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " секунд" << endl;
 
     return 0;
 }

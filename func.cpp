@@ -2,6 +2,7 @@
 #include <iostream>
 #include <bitset>
 #include <algorithm>
+#include <time.h>
 
 #include <queue>
 #include <vector>
@@ -49,7 +50,7 @@ void write_file(const string& filename, vector<int>& freq, const queue_t& queue,
     }
 
     double count = count_if(freq.begin(), freq.end(), [](const double& value) { return (value != 0); });
-    cout << "Count: " << (double)count << endl;
+    cout << "Уникальных символов: " << (double)count << endl;
 
     ofs.write(reinterpret_cast<char*>(&count), sizeof count);
 
@@ -84,6 +85,7 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
     string new_filename = filename + ".hfc";
     ifstream ifs(new_filename, ifstream::binary);
     if(!ifs){
+        throw "file does not exist";
         return;
     }
 
@@ -102,11 +104,13 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
     }
 
     int byte_count = 0;
-    uchar modulo = 0;
+    int modulo = 0;
     ifs.read(reinterpret_cast<char*>(&byte_count), sizeof byte_count);
-    ifs.read(reinterpret_cast<char*>(&modulo), sizeof modulo);
+    ifs.read(reinterpret_cast<char*>(&modulo), CHAR_BIT);
 
     int l = 0;
+    //cerr << byte_count << " - это int\n";
+    //cerr << modulo << " - это char\n";
     for(; l < byte_count; ++l){
         uchar byte;
         ifs.read(reinterpret_cast<char*>(&byte), sizeof byte);

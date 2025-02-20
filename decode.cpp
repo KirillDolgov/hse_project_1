@@ -2,10 +2,11 @@
 #include "func.cpp"
 
 int main(){
-    
     string frname;
     cout << "Введите имя файла без \".hfs\": ";
     cin >> frname;
+
+    clock_t startTime = clock();
 
     FILE* fr = fopen(frname.c_str(), "rb");
     if (!fr) {
@@ -15,8 +16,15 @@ int main(){
 
     vector<int> freq2(256, 0);
     string message2 = "";
-
-    read_decoding_file(frname, freq2, message2);
+    
+    //проверка что файл нужного расширения
+    try {
+        read_decoding_file(frname, freq2, message2);
+    }
+    catch(...) {
+        cerr << "Ошибка: этот файл не расширения .hfs.\n";
+        return 1;
+    }
 
     queue_t queue2;
     
@@ -45,6 +53,8 @@ int main(){
     string text = "";
     make_char(root2, message2, text);
     write_decoding_file(frname, text);
+
+    cout << "Заняло времени: " << double( clock() - startTime ) / (double)CLOCKS_PER_SEC<< " секунд" << endl;
 
     return 0;
 }
