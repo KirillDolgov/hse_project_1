@@ -108,7 +108,7 @@ void read_decoding_file(string filename, vector<int>& freq, string& message){
     ifs.read(reinterpret_cast<char*>(&byte_count), sizeof byte_count);
     ifs.read(reinterpret_cast<char*>(&modulo), sizeof dick);
     if (modulo == 0 && byte_count == 0) {
-        throw "Ошибка: файл слишком маленький.";
+        throw "Файл пустой";
         return;
     }
 

@@ -35,6 +35,16 @@ int main(){
         }
     }
 
+    if (queue2.size() == 1) {
+        // Если только один символ, создаем корень дерева отдельно
+        Node::pointer root2 = queue2.top();
+        queue2.pop();
+        Node::pointer new_root = make_shared<Node>(0, root2->get_freq());
+        new_root->left = root2;
+        root2->parent = new_root;
+        queue2.push(new_root);
+    }
+
     while(queue2.size() > 1)
     {
     Node::pointer x = queue2.top();

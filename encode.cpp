@@ -37,6 +37,15 @@ int main(){
         }
     }
 
+    if (queue.size() == 1) {
+    Node::pointer root = queue.top();
+    queue.pop();
+    Node::pointer new_root = make_shared<Node>(0, root->get_freq());
+    new_root->left = root;
+    root->parent = new_root;
+    queue.push(new_root);
+    }
+    
     while(queue.size() > 1)
     {
     Node::pointer x = queue.top();
